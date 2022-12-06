@@ -8,9 +8,7 @@ namespace AcompanhamentoFisico.Model
 		public String nome {get;set;}
 		public int idade {get;set;}
 		public char sexo {get;set;}
-		public decimal peso {get;set;}
-        public decimal altura { get; set; }
-		public int CPF {get; set;}
+		public long CPF {get; set;}
 
 		public int IdProfissionais { get; set; }
 

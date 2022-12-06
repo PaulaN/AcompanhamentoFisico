@@ -2,8 +2,6 @@
 {
 	public class Nutricionista
 	{
-
-
 		public int id { get; set; }
 
 		public String nome  { get; set; }

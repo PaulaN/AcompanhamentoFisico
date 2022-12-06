@@ -1,25 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AcompanhamentoFisico.BLL;
+using AcompanhamentoFisico.Model;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace AcompanhamentoFisico.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api/DadosPessoais")]
 	[ApiController]
-	public class ClienteController : ControllerBase
+	public class DadosPessoaisController : ControllerBase
 	{
-		// GET: api/<ClienteController>
-		[HttpGet]
-		public IEnumerable<string> Get()
-		{
-			return new string[] { "value1", "value2" };
-		}
 
-		// GET api/<ClienteController>/5
-		[HttpGet("{id}")]
-		public string Get(int id)
+		[HttpGet("{CPF}")]
+		public DadosPessoais BuscaPorCPF(long CPF)
 		{
-			return "value";
+			DadosPessoais dados = new DadosPessoais();
+
+			ClienteBLL bll = new ClienteBLL();
+			dados = bll.retornaDadosPessoaisDoCliente(CPF);
+
+			return dados;
 		}
 
 		// POST api/<ClienteController>
