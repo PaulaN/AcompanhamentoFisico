@@ -1,4 +1,6 @@
 ﻿using AcompanhamentoFisico.BLL;
+using AcompanhamentoFisico.DAO;
+using AcompanhamentoFisico.DTO;
 using AcompanhamentoFisico.Model;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,15 +14,17 @@ namespace AcompanhamentoFisico.Controllers
 	{
 
 		[HttpGet("{CPF}")]
-		public DadosPessoais BuscaPorCPF(long CPF)
+		public CadastroPessoalDTO BuscaPorCPF(long CPF)
 		{
-			DadosPessoais dados = new DadosPessoais();
-
+			ClienteDAO dao = new ClienteDAO();
 			ClienteBLL bll = new ClienteBLL();
-			dados = bll.retornaDadosPessoaisDoCliente(CPF);
+			CadastroPessoalDTO cadastroPessoal = new CadastroPessoalDTO();
 
-			return dados;
+			cadastroPessoal = bll.retornaDadosPessoaisDoCliente(CPF);
+
+			return cadastroPessoal;
 		}
+
 
 		// POST api/<ClienteController>
 		[HttpPost]

@@ -1,19 +1,23 @@
 ﻿using AcompanhamentoFisico.DAO;
+using AcompanhamentoFisico.DTO;
 using AcompanhamentoFisico.Model;
 
 namespace AcompanhamentoFisico.BLL
 {
 	public class ClienteBLL
 	{
-		public DadosPessoais retornaDadosPessoaisDoCliente(long CPF)
+		public CadastroPessoalDTO retornaDadosPessoaisDoCliente(long CPF)
 		{
-			DadosPessoais dadosPessoais = new DadosPessoais();
+			
 
 			ClienteDAO dao = new ClienteDAO();
+			CadastroPessoalDTO cadastroPessoal = new CadastroPessoalDTO();
 
-			dadosPessoais = dao.retornaDadosPessoais(CPF);
+			cadastroPessoal.dadosPessoais = dao.retornaDadosPessoais(CPF);
+			cadastroPessoal.endereco = dao.retornaEndereco(CPF);
 
-			return dadosPessoais;
+
+			return cadastroPessoal;
 		}
 	}
 }
