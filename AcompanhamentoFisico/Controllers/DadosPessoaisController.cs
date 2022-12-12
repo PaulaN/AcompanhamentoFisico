@@ -12,12 +12,13 @@ namespace AcompanhamentoFisico.Controllers
 	[ApiController]
 	public class DadosPessoaisController : ControllerBase
 	{
+		ClienteDAO dao = new ClienteDAO();
+		ClienteBLL bll = new ClienteBLL();
 
 		[HttpGet("{CPF}")]
 		public CadastroPessoalDTO BuscaPorCPF(long CPF)
 		{
-			ClienteDAO dao = new ClienteDAO();
-			ClienteBLL bll = new ClienteBLL();
+			
 			CadastroPessoalDTO cadastroPessoal = new CadastroPessoalDTO();
 
 			cadastroPessoal = bll.retornaDadosPessoaisDoCliente(CPF);
@@ -28,21 +29,31 @@ namespace AcompanhamentoFisico.Controllers
 
 		// POST api/<ClienteController>
 		[HttpPost]
-		public void Post()
+		public String Post(CadastroPessoalDTO cadastroPessoal)
 		{
+			String retorno = bll.insereDadosPessoaisDoCliente(cadastroPessoal);
+
+			return retorno;
 
 		}
 
 		// PUT api/<ClienteController>/5
-		[HttpPut("{id}")]
-		public void Put(int id, [FromBody] string value)
+		[HttpPut]
+		public String Put(CadastroPessoalDTO cadastroPessoal)
 		{
+			String retorno = bll.alteraDadosPessoais(cadastroPessoal);
+
+			return retorno;
 		}
 
 		// DELETE api/<ClienteController>/5
-		[HttpDelete("{id}")]
-		public void Delete(int id)
+		[HttpDelete("{CPF}")]
+		public String Delete(long CPF)
 		{
+
+			String retorno = bll.deletaDadosPessoais(CPF);
+
+			return retorno;
 		}
 	}
 }
