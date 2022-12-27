@@ -27,7 +27,7 @@ namespace AcompanhamentoFisico.Controllers
 		}
 
 
-		// POST api/<ClienteController>
+		
 		[HttpPost]
 		public String Post(CadastroPessoalDTO cadastroPessoal)
 		{
@@ -37,7 +37,7 @@ namespace AcompanhamentoFisico.Controllers
 
 		}
 
-		// PUT api/<ClienteController>/5
+	
 		[HttpPut]
 		public String Put(CadastroPessoalDTO cadastroPessoal)
 		{
@@ -46,7 +46,7 @@ namespace AcompanhamentoFisico.Controllers
 			return retorno;
 		}
 
-		// DELETE api/<ClienteController>/5
+		
 		[HttpDelete("{CPF}")]
 		public String Delete(long CPF)
 		{

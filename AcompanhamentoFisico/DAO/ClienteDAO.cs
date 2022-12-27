@@ -17,7 +17,7 @@ namespace AcompanhamentoFisico.DAO
 			DadosPessoaisDTO dadosPessoaisDTO = new DadosPessoaisDTO();
 			DadosPessoais dadosPessoais = new DadosPessoais();
 
-			string sql = "select * from dbo.DadosPessoais where CPF=" + CPF ;
+			string sql = "select id,nome,sexo,CPF,Format(dataNascimento,'dd/MM/yyyy') as dataNascimento from dbo.DadosPessoais where CPF=" + CPF ;
 
 			SqlConnection con = new SqlConnection(conexao);
 			SqlCommand cmd = new SqlCommand(sql, con);
@@ -30,11 +30,11 @@ namespace AcompanhamentoFisico.DAO
 				reader = cmd.ExecuteReader();
 				if (reader.Read())
 				{
-					dadosPessoais.Id = Convert.ToInt32(reader[0]);
+					dadosPessoais.Id = Convert.ToInt32(reader[0].ToString());
 					dadosPessoais.nome = reader[1].ToString();
-					dadosPessoais.idade = Convert.ToInt32(reader[2]);
-					dadosPessoais.sexo = Convert.ToChar(reader[3]);
-					dadosPessoais.CPF = Convert.ToInt64(reader[4]);
+					dadosPessoais.sexo = Convert.ToChar(reader[2]);
+					dadosPessoais.CPF = Convert.ToInt64(reader[3]);
+				    dadosPessoais.dataNascimento = reader[4].ToString();
 
 					var configuration = new MapperConfiguration(cfg =>
 					{
@@ -61,7 +61,7 @@ namespace AcompanhamentoFisico.DAO
 		{
 
 			String retorno = "";
-			string sql = "INSERT INTO dbo.DadosPessoais (nome, idade,sexo, CPF) VALUES (" + "'" + dadosPessoaisDTO.nome + "'" + "," + dadosPessoaisDTO.idade  + "," + "'" + dadosPessoaisDTO.sexo + "'" + "," + dadosPessoaisDTO.CPF + ")";
+			string sql = "INSERT INTO dbo.DadosPessoais (nome,sexo,CPF,dataNascimento) VALUES (" + "'" + dadosPessoaisDTO.nome + "'" + "," + "'" + dadosPessoaisDTO.sexo + "'" + "," + dadosPessoaisDTO.CPF + "," + "'" + dadosPessoaisDTO.dataNascimento + "'" + ")";
 			SqlConnection con = new SqlConnection(conexao);
 			SqlCommand cmd = new SqlCommand(sql, con);
 			cmd.CommandType = CommandType.Text;
@@ -77,7 +77,7 @@ namespace AcompanhamentoFisico.DAO
 		{
 
 			String retorno = "";
-			string sql = "UPDATE dbo.DadosPessoais SET  nome="+ "'" + dadosPessoaisDTO.nome+"'"+ ","+"idade="+dadosPessoaisDTO.idade+","+"sexo="+ "'" +dadosPessoaisDTO.sexo+"'" + "," +"CPF="+dadosPessoaisDTO.CPF+ " where CPF="+ dadosPessoaisDTO.CPF;
+			string sql = "UPDATE dbo.DadosPessoais SET  nome="+ "'" + dadosPessoaisDTO.nome+"'"+ ","+"sexo="+ "'" +dadosPessoaisDTO.sexo+"'" + "," +"CPF="+dadosPessoaisDTO.CPF+ "," + "dataNascimento="+ "'" + dadosPessoaisDTO.dataNascimento + "'"  +" where CPF="+ dadosPessoaisDTO.CPF;
 			SqlConnection con = new SqlConnection(conexao);
 			SqlCommand cmd = new SqlCommand(sql, con);
 			cmd.CommandType = CommandType.Text;
